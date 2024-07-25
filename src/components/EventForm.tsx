@@ -1,12 +1,21 @@
-// src/components/EventForm.js
-import React, { useState } from 'react';
+// src/components/EventForm.tsx
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { addAppointment, addStory } from '../features/eventSlice';
 
-const EventForm = () => {
+interface FormData {
+  date: string;
+  title: string;
+  location?: string;
+  notes?: string;
+  who?: string;
+  content?: string;
+}
+
+const EventForm: React.FC = () => {
   const dispatch = useDispatch();
-  const [formType, setFormType] = useState('appointment');
-  const [formData, setFormData] = useState({
+  const [formType, setFormType] = useState<'appointment' | 'story'>('appointment');
+  const [formData, setFormData] = useState<FormData>({
     date: '',
     title: '',
     location: '',
@@ -15,16 +24,16 @@ const EventForm = () => {
     content: '',
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (formType === 'appointment') {
-      dispatch(addAppointment(formData));
+      dispatch(addAppointment(formData as Required<FormData>));
     } else {
-      dispatch(addStory(formData));
+      dispatch(addStory(formData as Required<FormData>));
     }
     setFormData({ date: '', title: '', location: '', notes: '', who: '', content: '' });
   };
