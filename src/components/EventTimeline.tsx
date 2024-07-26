@@ -10,7 +10,7 @@ const EventTimeline: React.FC = () => {
     ...events.appointments.map(event => ({ ...event, type: 'Appointment' })),
     ...events.stories.map(event => ({ ...event, type: 'Story' }))
   ].sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
   return (
@@ -28,7 +28,7 @@ const EventTimeline: React.FC = () => {
             </div>
             <div className="flex mb-2">
               <div className="w-1/3 font-semibold text-gray-600">Title:</div>
-              <div className="w-1/3 text-md">{event.title}</div>
+              <div className="w-2/3 text-md">{event.title}</div>
             </div>
             {event.type === 'Appointment' && (
               <>

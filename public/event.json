@@ -2,27 +2,27 @@
     "appointments": [
       {
         "date": "2024-07-01",
-        "title": "Doctor's Appointment",
-        "location": "123 Main St, City",
-        "notes": "Annual check-up",
-        "who": "Dr. Smith"
+        "title": "Potential Client Meetup",
+        "location": "SLC Building",
+        "notes": "Discuss project Idea and Expectations",
+        "who": "Harsh- Front-End Dev"
       },
       {
-        "date": "2024-07-05",
-        "title": "Team Meeting",
-        "location": "Office",
-        "notes": "Monthly review",
-        "who": "Project Team"
+        "date": "2024-07-27",
+        "title": "Startup Meeting",
+        "location": "Waterloo University",
+        "notes": "New Hire",
+        "who": "Harsh"
       }
     ],
     "stories": [
       {
-        "date": "2024-07-10",
+        "date": "2024-07-25",
         "title": "Company Milestone",
         "content": "Reached 100,000 users on our platform. Great achievement for the team!"
       },
       {
-        "date": "2024-07-15",
+        "date": "2024-07-25",
         "title": "Conference",
         "content": "Attended the annual tech conference and presented our latest project."
       }
