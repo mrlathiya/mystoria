@@ -1,4 +1,3 @@
-// src/components/EventForm.tsx
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { addAppointment, addStory } from '../features/eventSlice';
@@ -38,6 +37,8 @@ const EventForm: React.FC = () => {
     setFormData({ date: '', title: '', location: '', notes: '', who: '', content: '' });
   };
 
+  const today = new Date().toISOString().split('T')[0];
+
   return (
     <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-4 bg-white rounded shadow-md">
       <div className="mb-4">
@@ -52,32 +53,76 @@ const EventForm: React.FC = () => {
       </div>
       <div className="mb-4">
         <label className="block text-gray-700">Date</label>
-        <input type="date" name="date" value={formData.date} onChange={handleChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+        <input 
+          type="date" 
+          name="date" 
+          value={formData.date} 
+          onChange={handleChange} 
+          required 
+          min={today} 
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
+        />
       </div>
       <div className="mb-4">
         <label className="block text-gray-700">Title</label>
-        <input type="text" name="title" value={formData.title} onChange={handleChange} placeholder="Title" required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+        <input 
+          type="text" 
+          name="title" 
+          value={formData.title} 
+          onChange={handleChange} 
+          placeholder="Title" 
+          required 
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
+        />
       </div>
       {formType === 'appointment' && (
         <>
           <div className="mb-4">
             <label className="block text-gray-700">Location</label>
-            <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="Location" required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+            <input 
+              type="text" 
+              name="location" 
+              value={formData.location} 
+              onChange={handleChange} 
+              placeholder="Location" 
+              required 
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
+            />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700">Who</label>
-            <input type="text" name="who" value={formData.who} onChange={handleChange} placeholder="Who" required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+            <label className="block text-gray-700">Meeting Person</label>
+            <input 
+              type="text" 
+              name="who" 
+              value={formData.who} 
+              onChange={handleChange} 
+              placeholder="The Person you'd Meet" 
+              required 
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
+            />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Notes</label>
-            <textarea name="notes" value={formData.notes} onChange={handleChange} placeholder="Notes" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+            <textarea 
+              name="notes" 
+              value={formData.notes} 
+              onChange={handleChange} 
+              placeholder="Notes" 
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            ></textarea>
           </div>
         </>
       )}
       {formType === 'story' && (
         <div className="mb-4">
           <label className="block text-gray-700">Content</label>
-          <textarea name="content" value={formData.content} onChange={handleChange} placeholder="Content" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+          <textarea 
+            name="content" 
+            value={formData.content} 
+            onChange={handleChange} 
+            placeholder="Content" 
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          ></textarea>
         </div>
       )}
       <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition duration-200">Add {formType}</button>

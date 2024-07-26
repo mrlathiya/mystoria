@@ -1,42 +1,40 @@
-// src/features/events/eventsSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface Appointment {
+interface Event {
   date: string;
   title: string;
-  location: string;
-  notes: string;
-  who: string;
-}
-
-interface Story {
-  date: string;
-  title: string;
-  content: string;
+  location?: string;
+  notes?: string;
+  who?: string;
+  content?: string;
 }
 
 interface EventsState {
-  appointments: Appointment[];
-  stories: Story[];
+  appointments: Event[];
+  stories: Event[];
 }
 
 const initialState: EventsState = {
   appointments: [],
-  stories: [],
+  stories: []
 };
 
 const eventsSlice = createSlice({
   name: 'events',
   initialState,
   reducers: {
-    addAppointment: (state, action: PayloadAction<Appointment>) => {
+    setEvents(state, action: PayloadAction<EventsState>) {
+      state.appointments = action.payload.appointments;
+      state.stories = action.payload.stories;
+    },
+    addAppointment(state, action: PayloadAction<Event>) {
       state.appointments.push(action.payload);
     },
-    addStory: (state, action: PayloadAction<Story>) => {
+    addStory(state, action: PayloadAction<Event>) {
       state.stories.push(action.payload);
-    },
-  },
+    }
+  }
 });
 
-export const { addAppointment, addStory } = eventsSlice.actions;
+export const { setEvents, addAppointment, addStory } = eventsSlice.actions;
 export default eventsSlice.reducer;

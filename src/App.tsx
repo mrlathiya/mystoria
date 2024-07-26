@@ -1,22 +1,26 @@
-
-import React from 'react';
-import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-import eventsReducer from './features/eventSlice';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setEvents } from './features/eventSlice';
 import EventManager from './pages/EventManager';
 
-const store = configureStore({
-  reducer: {
-    events: eventsReducer,
-  },
-});
+const App: React.FC = () => {
+  const dispatch = useDispatch();
 
-const App = () => {
-  return (
-    <Provider store={store}>
-      <EventManager />
-    </Provider>
-  );
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/events.json');
+        const data = await response.json();
+        dispatch(setEvents(data));
+      } catch (error) {
+        console.error('Error loading events data:', error);
+      }
+    };
+
+    fetchData();
+  }, [dispatch]);
+
+  return <EventManager />;
 };
 
 export default App;

@@ -1,6 +1,6 @@
-// src/components/EventTable.tsx
 import React, { useState, ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
+import ReactMarkdown from 'react-markdown';
 import { RootState } from '../store';
 
 interface Event {
@@ -8,6 +8,7 @@ interface Event {
   title: string;
   location?: string;
   content?: string;
+  notes?: string;
 }
 
 const EventTable: React.FC = () => {
@@ -51,6 +52,7 @@ const EventTable: React.FC = () => {
 
   return (
     <div>
+      <h2 className="text-xl font-semibold mb-4">Event Table</h2>
       <div className="mb-4 flex items-center">
         <div className="mr-4">
           <label className="mr-2">Start Date:</label>
@@ -72,6 +74,7 @@ const EventTable: React.FC = () => {
               <th className="py-2 px-4 border-b">Date</th>
               <th className="py-2 px-4 border-b">Title</th>
               <th className="py-2 px-4 border-b">Details</th>
+              <th className="py-2 px-4 border-b">Type</th>
             </tr>
           </thead>
           <tbody>
@@ -79,14 +82,20 @@ const EventTable: React.FC = () => {
               <tr key={index} className="hover:bg-gray-50">
                 <td className="py-2 px-4 border-b">{event.date}</td>
                 <td className="py-2 px-4 border-b">{event.title}</td>
-                <td className="py-2 px-4 border-b">{event.location}</td>
+                <td className="py-2 px-4 border-b">
+                  <ReactMarkdown>{event.location || event.notes || ''}</ReactMarkdown>
+                </td>
+                <td className="py-2 px-4 border-b">Appointment</td>
               </tr>
             ))}
             {filteredStories.map((event, index) => (
               <tr key={index} className="hover:bg-gray-50">
                 <td className="py-2 px-4 border-b">{event.date}</td>
                 <td className="py-2 px-4 border-b">{event.title}</td>
-                <td className="py-2 px-4 border-b">{event.content}</td>
+                <td className="py-2 px-4 border-b">
+                  <ReactMarkdown>{event.content || ''}</ReactMarkdown>
+                </td>
+                <td className="py-2 px-4 border-b">Story</td>
               </tr>  
             ))}
           </tbody>
