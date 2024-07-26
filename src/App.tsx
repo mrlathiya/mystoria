@@ -9,7 +9,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/events.json');
+        const response = await fetch('/event.json');
         const data = await response.json();
         dispatch(setEvents(data));
       } catch (error) {
